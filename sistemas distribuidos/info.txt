@@ -1,0 +1,1 @@
+aqui va el sistema de votacion para sistemas distribuidos
