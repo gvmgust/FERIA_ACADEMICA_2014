@@ -1,6 +1,6 @@
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>Encuesta</title>
 </head>
 <body>
@@ -39,7 +39,8 @@
 			}
 			if(!isset($ci)){
 				echo '<div align="center"><form method="post" action="">
-				C.I:&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp<input type="text" name="carnet" value="'.$_POST['carnet'].'"><br>
+				C.I:&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp&nbsp;&nbsp
+				<input type="text" name="carnet" value="'.$_POST['carnet'].'"><br>
 				Nombre:<input type="text" name="nombre"><br>
 				<input type="submit" value="Registrar">
 				</form> </div>';

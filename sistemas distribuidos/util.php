@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 	##funsion global que ayuda a crear una conexion a la base de datos
 	function conectar(){
