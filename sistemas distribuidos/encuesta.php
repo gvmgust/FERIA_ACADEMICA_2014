@@ -36,7 +36,8 @@
 			
 			if($resultado){
 				while($fila = $resultado->fetch_assoc()){
-					echo '<div align="center"><form method="post" action="encuesta.php?votante='.$_GET['votante'].'">'."\n";
+					echo '<div align="center"><form method="post" 
+						  action="encuesta.php?votante='.$_GET['votante'].'">'."\n";
 					echo '<input type="hidden" name=encuesta value="'.$fila['id_enc'].'">';
 					echo '<input type="submit" name="votar" value="'.$fila['titulo'].'"></form>'."\n</div>";
 				}
@@ -44,8 +45,11 @@
 			$mysqli->close();
 			
 		}else{
+			if(!isset($_POST['encuesta'])||!isset($_GET['votante'])){
+				die('usted no está autorizado para votar');
+			}
 			$pregunta = new pregunta();
-			$pregunta->listar($_POST['encuesta']);
+			$pregunta->listar($_POST['encuesta'],$_GET['votante']);
 		}
 	?>
 </body>

@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 	##funsion global que ayuda a crear una conexion a la base de datos
 	function conectar(){
@@ -35,7 +35,7 @@
 			$mysqli->close();
 		}
 		
-		function listar($id_enc){
+		function listar($id_enc,$encuestado){
 			$consulta = "SELECT id_pre FROM pregunta WHERE id_enc = '".$id_enc."'";
 			$mysqli = conectar();
 			$r = NULL;
@@ -47,8 +47,9 @@
 			}
 			$mysqli->close();
 			$preguntas = NULL;
-			echo '<form method="get" action="encuestar.php">'."\n";
-			echo '<input type="hidden" name=encuesta value="'.$id_enc.'"';
+			echo '<form method="POST" action="encuestar.php">'."\n";
+			echo '<input type="hidden" name=encuesta value="'.$id_enc.'">';
+			echo '<input type="hidden" name=encuestado value="'.$encuestado.'">';
 			for($i=0;$i<count($r);$i++){
 				$P = new pregunta();
 				$P->instanciar($r[$i],$id_enc);
@@ -72,7 +73,8 @@
 		function mostrarPreguntas(){
 			echo '<label>'.$this->pregunta.'</label><br>';	
 			for($i=0;$i<count($this->respuesta);$i++){
-				echo '<input type="radio" name="p'.$this->id_pre.'" value="'.$this->id_res[$i].'">'.$this->respuesta[$i].'<br>'."\n";
+				echo '<input type="radio" name="p'.
+				$this->id_pre.'" value="'.$this->id_res[$i].'">'.$this->respuesta[$i].'<br>'."\n";
 			}
 		}
 		

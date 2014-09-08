@@ -1,4 +1,4 @@
-﻿CREATE DATABASE `encuesta`;
+CREATE DATABASE `encuesta`;
 
 USE `encuesta`;
 
