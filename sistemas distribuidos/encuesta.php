@@ -9,14 +9,26 @@
 		if(isset($_GET['votante']) && !isset($_POST['encuesta'])){
 			$mysqli = conectar();
 			$ci = $_GET['votante'];
-			$consulta = "SELECT * FROM votante WHERE ci = '".$ci."'";
+			if(isset($_GET['univ'])){
+				$consulta = "SELECT * FROM universitario where registro='".$ci."'";
+			}else{
+				$consulta = "SELECT * FROM votante WHERE ci = '".$ci."'";
+			}
 			$ci=NULL;
 			$resultado = $mysqli->query($consulta);
 			if($resultado){
-				while($fila = $resultado->fetch_assoc()){
-					$ci = $fila['ci'];
-					$registro = $fila['registro'];
-					$nombre = $fila['nombre'];	
+				if(isset($_GET['univ'])){
+					while($fila = $resultado->fetch_assoc()){
+						$ci = $fila['registro'];	
+						$nombre = $fila['nombre'];						
+						$carrera = $fila['carrera'];	
+					}
+				}else{
+					while($fila = $resultado->fetch_assoc()){
+						$ci = $fila['ci'];
+						$colegio = $fila['colegio'];
+						$nombre = $fila['nombre'];	
+					}
 				}
 			}
 			$mysqli->close();

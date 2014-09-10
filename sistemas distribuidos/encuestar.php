@@ -42,16 +42,30 @@
 	$mysqli->close();
 	$r = NULL;
 	$mysqli = conectar();
-	for($i = 0;$i< count($verificacion);$i++){
-		$r = $_POST['p'.$verificacion[$i]];	
-		$consulta = "INSERT INTO guarda(num,id_pre,res)VALUES('".$num."','".$verificacion[$i]."','".$r."');";
-		$mysqli->query($consulta);
+	$consulta = "SELECT fecha FROM responde WHERE id_enc = '".$enc."' AND ci = '".$vot."'"; 
+	$flag = false;
+	$respuesta = $mysqli->query($consulta);
+	if($respuesta){
+		while($fila = $respuesta->fetch_assoc()){
+			$fecha = $fila['fecha'];
+			$flag = true;
+		}
 	}
-	$consulta = "INSERT INTO responde(id_enc,ci)VALUES('".$enc."','".$vot."');";
-	$mysqli->query($consulta);
-	$mysqli->close();
-	echo "Su Votación está siendo procesada...<br>
-	gracias por su participación";
+	
+	if(!$flag){
+		for($i = 0;$i< count($verificacion);$i++){
+			$r = $_POST['p'.$verificacion[$i]];	
+			$consulta = "INSERT INTO guarda(num,id_pre,res)VALUES('".$num."','".$verificacion[$i]."','".$r."');";
+			$mysqli->query($consulta);
+		}
+		$consulta = "INSERT INTO responde(id_enc,ci)VALUES('".$enc."','".$vot."');";
+		$mysqli->query($consulta);
+		$mysqli->close();
+		echo "Su Votación está siendo procesada...<br>
+		gracias por su participación";
+	}else{
+		die('ERROR: Usted ya participo de esta encuesta en esta fecha:"'.$fecha.'"');
+	}
 ?>
 </body>
 </html>
