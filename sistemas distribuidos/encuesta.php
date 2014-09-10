@@ -60,6 +60,13 @@
 			if(!isset($_POST['encuesta'])||!isset($_GET['votante'])){
 				die('usted no está autorizado para votar');
 			}
+			$mysqli = conectar();
+			if(isset($_GET['univ'])){
+				$consulta = "";
+			}else{
+				$consulta ="";
+			}
+			
 			$pregunta = new pregunta();
 			$pregunta->listar($_POST['encuesta'],$_GET['votante']);
 		}

@@ -111,6 +111,7 @@
 				}
 			}else{
 				if(isset($pass)){
+					//relocate(‘page.php’,{‘var1':’hola’,'var2':’Mundo’});
 					header('Location: encuesta.php?votante='.$reg.'&univ=1');
 				}else{
 					header('Location: encuesta.php?votante='.$ci.'');
